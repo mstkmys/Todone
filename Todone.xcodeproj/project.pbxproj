@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		68BE807E205A74AF0025F3F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE807D205A74AF0025F3F2 /* AppDelegate.swift */; };
-		68BE8080205A74AF0025F3F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE807F205A74AF0025F3F2 /* ViewController.swift */; };
-		68BE8083205A74AF0025F3F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68BE8081205A74AF0025F3F2 /* Main.storyboard */; };
 		68BE8085205A74AF0025F3F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68BE8084205A74AF0025F3F2 /* Assets.xcassets */; };
 		68BE8088205A74AF0025F3F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68BE8086205A74AF0025F3F2 /* LaunchScreen.storyboard */; };
 		68BE8093205A74AF0025F3F2 /* TodoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE8092205A74AF0025F3F2 /* TodoneTests.swift */; };
 		68BE809E205A74AF0025F3F2 /* TodoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE809D205A74AF0025F3F2 /* TodoneUITests.swift */; };
+		68BE80B2205A765F0025F3F2 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80B1205A765F0025F3F2 /* TodoListViewController.swift */; };
+		68BE80B4205A76C10025F3F2 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80B3205A76C10025F3F2 /* TodoListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +36,6 @@
 /* Begin PBXFileReference section */
 		68BE807A205A74AF0025F3F2 /* Todone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68BE807D205A74AF0025F3F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		68BE807F205A74AF0025F3F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		68BE8082205A74AF0025F3F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68BE8084205A74AF0025F3F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68BE8087205A74AF0025F3F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68BE8089205A74AF0025F3F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +45,8 @@
 		68BE8099205A74AF0025F3F2 /* TodoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68BE809D205A74AF0025F3F2 /* TodoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoneUITests.swift; sourceTree = "<group>"; };
 		68BE809F205A74AF0025F3F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68BE80B1205A765F0025F3F2 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		68BE80B3205A76C10025F3F2 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +97,8 @@
 		68BE807C205A74AF0025F3F2 /* Todone */ = {
 			isa = PBXGroup;
 			children = (
-				68BE807D205A74AF0025F3F2 /* AppDelegate.swift */,
-				68BE807F205A74AF0025F3F2 /* ViewController.swift */,
-				68BE8081205A74AF0025F3F2 /* Main.storyboard */,
-				68BE8084205A74AF0025F3F2 /* Assets.xcassets */,
-				68BE8086205A74AF0025F3F2 /* LaunchScreen.storyboard */,
+				68BE80AC205A75DB0025F3F2 /* Resources */,
+				68BE80AB205A75D10025F3F2 /* Classes */,
 				68BE8089205A74AF0025F3F2 /* Info.plist */,
 			);
 			path = Todone;
@@ -123,6 +120,57 @@
 				68BE809F205A74AF0025F3F2 /* Info.plist */,
 			);
 			path = TodoneUITests;
+			sourceTree = "<group>";
+		};
+		68BE80AB205A75D10025F3F2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				68BE807D205A74AF0025F3F2 /* AppDelegate.swift */,
+				68BE80B0205A760B0025F3F2 /* Models */,
+				68BE80AF205A76060025F3F2 /* Views */,
+				68BE80AE205A75FF0025F3F2 /* Controllers */,
+				68BE80AD205A75F30025F3F2 /* Extensions */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		68BE80AC205A75DB0025F3F2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				68BE8084205A74AF0025F3F2 /* Assets.xcassets */,
+				68BE8086205A74AF0025F3F2 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		68BE80AD205A75F30025F3F2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		68BE80AE205A75FF0025F3F2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				68BE80B1205A765F0025F3F2 /* TodoListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		68BE80AF205A76060025F3F2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68BE80B3205A76C10025F3F2 /* TodoListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		68BE80B0205A760B0025F3F2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +282,6 @@
 			files = (
 				68BE8088205A74AF0025F3F2 /* LaunchScreen.storyboard in Resources */,
 				68BE8085205A74AF0025F3F2 /* Assets.xcassets in Resources */,
-				68BE8083205A74AF0025F3F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +306,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68BE8080205A74AF0025F3F2 /* ViewController.swift in Sources */,
+				68BE80B2205A765F0025F3F2 /* TodoListViewController.swift in Sources */,
 				68BE807E205A74AF0025F3F2 /* AppDelegate.swift in Sources */,
+				68BE80B4205A76C10025F3F2 /* TodoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +344,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		68BE8081205A74AF0025F3F2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				68BE8082205A74AF0025F3F2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		68BE8086205A74AF0025F3F2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,7 +403,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -414,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -429,11 +469,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WDFA67X5D5;
 				INFOPLIST_FILE = Todone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.mstk.Todone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -444,11 +485,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WDFA67X5D5;
 				INFOPLIST_FILE = Todone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.mstk.Todone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
