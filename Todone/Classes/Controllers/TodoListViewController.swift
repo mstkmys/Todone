@@ -19,10 +19,16 @@ class TodoListViewController: UIViewController {
         
     }()
     
+    // MARK: - Properties
+    
+    let itemArray = ["Find Money", "Finish Homework", "Play Game"]
+    
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpNavigation()
         
         // Add Views
         [todoListView].forEach{ self.view.addSubview($0) }
@@ -30,6 +36,15 @@ class TodoListViewController: UIViewController {
         // Datasouce, Delegate
         todoListView.todoListTableView.dataSource = self
         todoListView.todoListTableView.delegate = self
+        
+    }
+    
+    // MARK: - Methods
+    
+    private func setUpNavigation() {
+        
+        self.navigationItem.title = "TODO"
+        self.navigationController?.navigationBar.barTintColor = .nigelle()
         
     }
 
@@ -40,12 +55,20 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return itemArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Cell Row Height
+        return 44
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TodoListTableViewCell.self), for: indexPath) as! TodoListTableViewCell
+        
+        // Set Label Text
+        cell.textLabel?.text = "aaaa"
         
         return cell
         
@@ -58,7 +81,11 @@ extension TodoListViewController: UITableViewDataSource {
 extension TodoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected cell [\(indexPath.row)]")
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
 }

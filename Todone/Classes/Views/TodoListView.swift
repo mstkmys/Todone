@@ -16,7 +16,7 @@ class TodoListView: UIView {
        
         let tableView = UITableView()
         tableView.showsVerticalScrollIndicator = false
-//        tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         tableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TodoListTableViewCell.self))
         
         return tableView
@@ -42,7 +42,7 @@ class TodoListView: UIView {
     override func layoutSubviews() {
         
         todoListTableView.anchor(
-            top: self.topAnchor,
+            top: self.safeAreaLayoutGuide.topAnchor,
             leading: self.leadingAnchor,
             bottom: self.bottomAnchor,
             trailing: self.trailingAnchor
