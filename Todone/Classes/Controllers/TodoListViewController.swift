@@ -21,7 +21,7 @@ class TodoListViewController: UIViewController {
     
     // MARK: - Properties
     
-    let itemArray = ["Find Money", "Finish Homework", "Play Game"]
+    var itemArray = ["Find Money", "Finish Homework", "Play Game"]
     
     // MARK: - Life Cycle
 
@@ -45,6 +45,40 @@ class TodoListViewController: UIViewController {
         
         self.navigationItem.title = "TODO"
         self.navigationController?.navigationBar.barTintColor = .nigelle()
+        self.navigationController?.navigationBar.tintColor = .white
+        
+        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButtonTapped(_:)))
+        self.navigationItem.rightBarButtonItem = addBarButton
+        
+    }
+    
+    private func updateUI() {
+        self.todoListView.todoListTableView.reloadData()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func addButtonTapped(_ sender: UIButton) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New TODO", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add", style: .default) { action in
+            
+            self.itemArray.append(textField.text!)
+            self.updateUI()
+            
+        }
+        
+        alert.addTextField { alertTextField in
+            alertTextField.placeholder = "Add New TODO"
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
         
     }
 
@@ -64,13 +98,18 @@ extension TodoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        var cell: UITableViewCell?
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(TodoListTableViewCell.self), for: indexPath) as! TodoListTableViewCell
+        if cell == nil {
+            // Create Cell
+            cell = UITableViewCell(style: .value1, reuseIdentifier: NSStringFromClass(TodoListTableViewCell.self))
+        }
         
-        // Set Label Text
-        cell.textLabel?.text = "aaaa"
+        // Set Text For IndexPath
+        cell?.textLabel?.text = itemArray[indexPath.row]
         
-        return cell
+        return cell!
         
     }
     
@@ -82,7 +121,13 @@ extension TodoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        // Checkmark
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }
+        else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
         

@@ -11,24 +11,11 @@ import UIKit
 class TodoListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-
-//    let label: UILabel = {
-//
-//        let label = UILabel()
-//
-//        return label
-//
-//    }()
     
     // MARK: - Initialize
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        // Add Views
-//        [].forEach{ self.addSubview($0) }
-        
-        self.textLabel?.text = "AAAA"
         
     }
     
@@ -38,15 +25,11 @@ class TodoListTableViewCell: UITableViewCell {
     
     // MARK: - Layout
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
     override func layoutSubviews() {
-        
-//        label.anchor(
-//            top: self.topAnchor,
-//            leading: self.leadingAnchor,
-//            bottom: self.bottomAnchor,
-//            trailing: nil,
-//            padding: .init(top: 10, left: 10, bottom: 0, right: 10)
-//        )
         
     }
 
