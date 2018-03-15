@@ -22,6 +22,7 @@ class TodoListViewController: UIViewController {
     // MARK: - Properties
     
     var itemArray = ["Find Money", "Finish Homework", "Play Game"]
+    let defaults = UserDefaults.standard
     
     // MARK: - Life Cycle
 
@@ -36,6 +37,10 @@ class TodoListViewController: UIViewController {
         // Datasouce, Delegate
         todoListView.todoListTableView.dataSource = self
         todoListView.todoListTableView.delegate = self
+        
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
         
     }
     
@@ -67,6 +72,9 @@ class TodoListViewController: UIViewController {
         let action = UIAlertAction(title: "Add", style: .default) { action in
             
             self.itemArray.append(textField.text!)
+            
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
+            
             self.updateUI()
             
         }
