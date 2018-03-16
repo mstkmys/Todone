@@ -21,7 +21,7 @@ class TodoListViewController: UIViewController {
     
     // MARK: - Properties
     
-    var itemArray = ["Find Money", "Finish Homework", "Play Game"]
+    var itemArray = [Item]()
     let defaults = UserDefaults.standard
     
     // MARK: - Life Cycle
@@ -31,14 +31,25 @@ class TodoListViewController: UIViewController {
         
         setUpNavigation()
         
-        // Add Views
+        // Add views
         [todoListView].forEach{ self.view.addSubview($0) }
         
         // Datasouce, Delegate
         todoListView.todoListTableView.dataSource = self
         todoListView.todoListTableView.delegate = self
         
-        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+        let newItem = Item()
+        newItem.title = "Find Milk"
+        
+        let newItem2 = Item()
+        newItem2.title = "Go Work"
+        
+        let newItem3 = Item()
+        newItem3.title = "Play Game"
+        
+        [newItem, newItem2, newItem3].forEach{ itemArray.append($0) }
+        
+        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
             itemArray = items
         }
         
@@ -71,7 +82,10 @@ class TodoListViewController: UIViewController {
         
         let action = UIAlertAction(title: "Add", style: .default) { action in
             
-            self.itemArray.append(textField.text!)
+            let newItem = Item()
+            newItem.title = textField.text!
+            
+            self.itemArray.append(newItem)
             
             self.defaults.set(self.itemArray, forKey: "TodoListArray")
             
@@ -101,7 +115,7 @@ extension TodoListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Cell Row Height
+        // Cell row height
         return 44
     }
     
@@ -110,12 +124,17 @@ extension TodoListViewController: UITableViewDataSource {
         var cell: UITableViewCell?
         
         if cell == nil {
-            // Create Cell
+            // Create cell
             cell = UITableViewCell(style: .value1, reuseIdentifier: NSStringFromClass(TodoListTableViewCell.self))
         }
         
-        // Set Text For IndexPath
-        cell?.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
+        
+        // Set text for indexPath
+        cell?.textLabel?.text = item.title
+        
+        // Set checkmark if done Property is true
+        cell?.accessoryType = item.done ? .checkmark : .none
         
         return cell!
         
@@ -129,13 +148,9 @@ extension TodoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // Checkmark
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        }
-        else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        
+        tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
         
