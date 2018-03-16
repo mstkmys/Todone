@@ -22,7 +22,7 @@ class TodoListViewController: UIViewController {
     // MARK: - Properties
     
     var itemArray = [Item]()
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     // MARK: - Life Cycle
 
@@ -49,9 +49,9 @@ class TodoListViewController: UIViewController {
         
         [newItem, newItem2, newItem3].forEach{ itemArray.append($0) }
         
-        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-            itemArray = items
-        }
+//        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
+//            itemArray = items
+//        }
         
     }
     
@@ -69,7 +69,23 @@ class TodoListViewController: UIViewController {
     }
     
     private func updateUI() {
-        self.todoListView.todoListTableView.reloadData()
+        todoListView.todoListTableView.reloadData()
+    }
+    
+    private func saveItems() {
+        
+        let encoder = PropertyListEncoder()
+        // Throws
+        do {
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        }
+        catch {
+            print("Error encoding item array [\(error)]")
+        }
+        
+        updateUI()
+        
     }
     
     // MARK: - Actions
@@ -86,10 +102,9 @@ class TodoListViewController: UIViewController {
             newItem.title = textField.text!
             
             self.itemArray.append(newItem)
-            
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            
-            self.updateUI()
+
+            // Save into Userdefaults
+            self.saveItems()
             
         }
         
@@ -150,7 +165,8 @@ extension TodoListViewController: UITableViewDelegate {
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        tableView.reloadData()
+        // Save into Userdefaults
+        saveItems()
         
         tableView.deselectRow(at: indexPath, animated: true)
         
