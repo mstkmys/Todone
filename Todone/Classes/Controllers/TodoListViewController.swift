@@ -36,9 +36,11 @@ class TodoListViewController: UIViewController {
         [todoListView].forEach{ self.view.addSubview($0) }
         
         // Datasouce, Delegate
+        todoListView.searchBar.delegate = self
         todoListView.todoListTableView.dataSource = self
         todoListView.todoListTableView.delegate = self
         
+        // loadItem
         loadImtes()
         
     }
@@ -74,15 +76,16 @@ class TodoListViewController: UIViewController {
         
     }
     
-    private func loadImtes() {
+    private func loadImtes(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
 
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
         do {
             itemArray = try context.fetch(request)
         }
         catch {
             print("Error fetching context: \(error)")
         }
+        
+        updateUI()
 
     }
     
@@ -117,6 +120,37 @@ class TodoListViewController: UIViewController {
         
     }
 
+}
+
+// MARK: - UITableViewDataSource
+/***************************************************************************************************************/
+extension TodoListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        loadImtes(with: request)
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text?.count == 0 {
+            
+            loadImtes()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+
+        }
+        
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -166,7 +200,7 @@ extension TodoListViewController: UITableViewDelegate {
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        // Save into Userdefaults
+        // Save
         saveItems()
         
         tableView.deselectRow(at: indexPath, animated: true)

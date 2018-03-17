@@ -1,31 +1,23 @@
 //
-//  TodoListView.swift
+//  CategoryView.swift
 //  Todone
 //
-//  Created by Miyoshi Masataka on 2018/03/15.
+//  Created by Miyoshi Masataka on 2018/03/17.
 //  Copyright © 2018年 Masataka Miyoshi. All rights reserved.
 //
 
 import UIKit
 
-class TodoListView: UIView {
-    
+class CategoryView: UIView {
+
     // MARK: - Properties
     
-    let searchBar: UISearchBar = {
-       
-        let searchBar = UISearchBar()
+    let categoryTableView: UITableView = {
         
-        return searchBar
-        
-    }()
-    
-    let todoListTableView: UITableView = {
-       
         let tableView = UITableView()
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
-        tableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TodoListTableViewCell.self))
+        tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(CategoryTableViewCell.self))
         
         return tableView
         
@@ -37,7 +29,7 @@ class TodoListView: UIView {
         super.init(frame: frame)
         
         // Add Views
-        [searchBar,todoListTableView].forEach{ self.addSubview($0) }
+        [categoryTableView].forEach{ self.addSubview($0) }
         
     }
     
@@ -49,16 +41,8 @@ class TodoListView: UIView {
     
     override func layoutSubviews() {
         
-        searchBar.anchor(
+        categoryTableView.anchor(
             top: self.safeAreaLayoutGuide.topAnchor,
-            leading: self.leadingAnchor,
-            bottom: nil,
-            trailing: self.trailingAnchor,
-            size: .init(width: 0, height: 64)
-        )
-        
-        todoListTableView.anchor(
-            top: searchBar.bottomAnchor,
             leading: self.leadingAnchor,
             bottom: self.bottomAnchor,
             trailing: self.trailingAnchor
@@ -67,6 +51,14 @@ class TodoListView: UIView {
     }
 
 }
+
+
+
+
+
+
+
+
 
 
 
