@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategotyViewController: UIViewController {
 
@@ -22,8 +22,8 @@ class CategotyViewController: UIViewController {
     
     // MARK: - Properties
     
-    var categoryArray = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let realm = try! Realm()
+    var categoryArray: Results<Category>?
     
     // MARK: - Life Cycle
     
@@ -63,10 +63,12 @@ class CategotyViewController: UIViewController {
     
     // MARK: - Data Manipulation
     
-    private func saveCategories() {
+    private func save(category: Category) {
         
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         }
         catch {
             print("Error saving categories: \(error)")
@@ -75,14 +77,10 @@ class CategotyViewController: UIViewController {
         
     }
     
-    private func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+    private func loadCategories() {
         
-        do {
-            categoryArray = try context.fetch(request)
-        }
-        catch {
-            print("Error fetching categories: \(error)")
-        }
+        categoryArray = realm.objects(Category.self)
+        
         updateUI()
         
     }
@@ -97,13 +95,11 @@ class CategotyViewController: UIViewController {
         
         let action = UIAlertAction(title: "Add", style: .default) { action in
             
-            let newCategory = Category(context: self.context)
+            let newCategory = Category()
             newCategory.name = textField.text!
             
-            self.categoryArray.append(newCategory)
-            
             // Save into Userdefaults
-            self.saveCategories()
+            self.save(category: newCategory)
             
         }
         
@@ -126,7 +122,7 @@ class CategotyViewController: UIViewController {
 extension CategotyViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray.count
+        return categoryArray?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -144,7 +140,7 @@ extension CategotyViewController: UITableViewDataSource {
         }
         
         // Set text for indexPath
-        cell?.textLabel?.text = categoryArray[indexPath.row].name
+        cell?.textLabel?.text = categoryArray?[indexPath.row].name ?? "No Category"
         
         return cell!
         
@@ -161,7 +157,8 @@ extension CategotyViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let todoListVC = TodoListViewController()
-        todoListVC.selectedCategory = categoryArray[indexPath.row]
+        todoListVC.selectedCategory = categoryArray?[indexPath.row]
+        todoListVC.navigationTitle = categoryArray?[indexPath.row].name
         self.navigationController?.pushViewController(todoListVC, animated: true)
         
     }

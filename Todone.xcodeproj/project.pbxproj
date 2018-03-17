@@ -17,12 +17,13 @@
 		68BE80B6205A78370025F3F2 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80B5205A78370025F3F2 /* UIView.swift */; };
 		68BE80B9205A7AB50025F3F2 /* TodoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80B8205A7AB50025F3F2 /* TodoListTableViewCell.swift */; };
 		68BE80BB205A85130025F3F2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80BA205A85130025F3F2 /* UIColor.swift */; };
-		68BE80E1205CBB220025F3F2 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80DF205CBB220025F3F2 /* DataModel.xcdatamodeld */; };
 		68BE80E3205D5E560025F3F2 /* CategotyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80E2205D5E560025F3F2 /* CategotyViewController.swift */; };
 		68BE80E5205D5E8B0025F3F2 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80E4205D5E8B0025F3F2 /* CategoryView.swift */; };
 		68BE80E7205D5EAC0025F3F2 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80E6205D5EAC0025F3F2 /* CategoryTableViewCell.swift */; };
 		68BE80EB205D72A10025F3F2 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BE80E9205D72A00025F3F2 /* RealmSwift.framework */; };
 		68BE80EC205D72A10025F3F2 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BE80EA205D72A00025F3F2 /* Realm.framework */; };
+		68BE80F1205D77260025F3F2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80F0205D77260025F3F2 /* Item.swift */; };
+		68BE80F3205D772E0025F3F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80F2205D772E0025F3F2 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,12 +60,13 @@
 		68BE80B5205A78370025F3F2 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		68BE80B8205A7AB50025F3F2 /* TodoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTableViewCell.swift; sourceTree = "<group>"; };
 		68BE80BA205A85130025F3F2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		68BE80E0205CBB220025F3F2 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		68BE80E2205D5E560025F3F2 /* CategotyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategotyViewController.swift; sourceTree = "<group>"; };
 		68BE80E4205D5E8B0025F3F2 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		68BE80E6205D5EAC0025F3F2 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		68BE80E9205D72A00025F3F2 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		68BE80EA205D72A00025F3F2 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		68BE80F0205D77260025F3F2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		68BE80F2205D772E0025F3F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +197,8 @@
 		68BE80B0205A760B0025F3F2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				68BE80DF205CBB220025F3F2 /* DataModel.xcdatamodeld */,
+				68BE80F2205D772E0025F3F2 /* Category.swift */,
+				68BE80F0205D77260025F3F2 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -371,15 +374,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				68BE80B6205A78370025F3F2 /* UIView.swift in Sources */,
-				68BE80E1205CBB220025F3F2 /* DataModel.xcdatamodeld in Sources */,
 				68BE80BB205A85130025F3F2 /* UIColor.swift in Sources */,
 				68BE80B2205A765F0025F3F2 /* TodoListViewController.swift in Sources */,
 				68BE807E205A74AF0025F3F2 /* AppDelegate.swift in Sources */,
 				68BE80E7205D5EAC0025F3F2 /* CategoryTableViewCell.swift in Sources */,
+				68BE80F1205D77260025F3F2 /* Item.swift in Sources */,
 				68BE80B9205A7AB50025F3F2 /* TodoListTableViewCell.swift in Sources */,
 				68BE80E3205D5E560025F3F2 /* CategotyViewController.swift in Sources */,
 				68BE80B4205A76C10025F3F2 /* TodoListView.swift in Sources */,
 				68BE80E5205D5E8B0025F3F2 /* CategoryView.swift in Sources */,
+				68BE80F3205D772E0025F3F2 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,19 +683,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		68BE80DF205CBB220025F3F2 /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				68BE80E0205CBB220025F3F2 /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 68BE80E0205CBB220025F3F2 /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 68BE8072205A74AF0025F3F2 /* Project object */;
 }
