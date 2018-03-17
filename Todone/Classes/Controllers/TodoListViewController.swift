@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoListViewController: UIViewController {
     
@@ -22,7 +23,7 @@ class TodoListViewController: UIViewController {
     // MARK: - Properties
     
     var itemArray = [Item]()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // MARK: - Life Cycle
 
@@ -38,20 +39,7 @@ class TodoListViewController: UIViewController {
         todoListView.todoListTableView.dataSource = self
         todoListView.todoListTableView.delegate = self
         
-        let newItem = Item()
-        newItem.title = "Find Milk"
-        
-        let newItem2 = Item()
-        newItem2.title = "Go Work"
-        
-        let newItem3 = Item()
-        newItem3.title = "Play Game"
-        
-        [newItem, newItem2, newItem3].forEach{ itemArray.append($0) }
-        
-//        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-//            itemArray = items
-//        }
+        loadImtes()
         
     }
     
@@ -74,18 +62,28 @@ class TodoListViewController: UIViewController {
     
     private func saveItems() {
         
-        let encoder = PropertyListEncoder()
         // Throws
         do {
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
+            try context.save()
         }
         catch {
-            print("Error encoding item array [\(error)]")
+            print("Error saving context: \(error)")
         }
         
         updateUI()
         
+    }
+    
+    private func loadImtes() {
+
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            itemArray = try context.fetch(request)
+        }
+        catch {
+            print("Error fetching context: \(error)")
+        }
+
     }
     
     // MARK: - Actions
@@ -98,7 +96,7 @@ class TodoListViewController: UIViewController {
         
         let action = UIAlertAction(title: "Add", style: .default) { action in
             
-            let newItem = Item()
+            let newItem = Item(context: self.context)
             newItem.title = textField.text!
             
             self.itemArray.append(newItem)
@@ -162,6 +160,9 @@ extension TodoListViewController: UITableViewDataSource {
 extension TodoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//        context.delete(itemArray[indexPath.row])
+//        itemArray.remove(at: indexPath.row)
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
