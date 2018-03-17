@@ -23,6 +23,11 @@ class TodoListViewController: UIViewController {
     // MARK: - Properties
     
     var itemArray = [Item]()
+    var selectedCategory: Category? {
+        didSet {
+            loadImtes()
+        }
+    }
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // MARK: - Life Cycle
@@ -39,9 +44,6 @@ class TodoListViewController: UIViewController {
         todoListView.searchBar.delegate = self
         todoListView.todoListTableView.dataSource = self
         todoListView.todoListTableView.delegate = self
-        
-        // loadItem
-        loadImtes()
         
     }
     
@@ -76,8 +78,17 @@ class TodoListViewController: UIViewController {
         
     }
     
-    private func loadImtes(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    private func loadImtes(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
 
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        if let addtionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, addtionalPredicate])
+        }
+        else {
+            request.predicate = categoryPredicate
+        }
+        
+        // Fetch
         do {
             itemArray = try context.fetch(request)
         }
@@ -101,6 +112,7 @@ class TodoListViewController: UIViewController {
             
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
+            newItem.parentCategory = self.selectedCategory
             
             self.itemArray.append(newItem)
 
@@ -130,11 +142,11 @@ extension TodoListViewController: UISearchBarDelegate {
         
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        loadImtes(with: request)
+        loadImtes(with: request, predicate: predicate)
         
     }
     

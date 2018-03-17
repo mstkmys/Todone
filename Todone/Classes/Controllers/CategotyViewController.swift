@@ -143,10 +143,8 @@ extension CategotyViewController: UITableViewDataSource {
             cell = UITableViewCell(style: .value1, reuseIdentifier: NSStringFromClass(CategoryTableViewCell.self))
         }
         
-        let category = categoryArray[indexPath.row]
-        
         // Set text for indexPath
-        cell?.textLabel?.text = category.name
+        cell?.textLabel?.text = categoryArray[indexPath.row].name
         
         return cell!
         
@@ -160,13 +158,11 @@ extension CategotyViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //        context.delete(itemArray[indexPath.row])
-        //        itemArray.remove(at: indexPath.row)
-        
-        // Save
-        saveCategories()
-        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let todoListVC = TodoListViewController()
+        todoListVC.selectedCategory = categoryArray[indexPath.row]
+        self.navigationController?.pushViewController(todoListVC, animated: true)
         
     }
 
