@@ -49,8 +49,6 @@ class CategotyViewController: UIViewController {
     private func setUpNavigation() {
         
         self.navigationItem.title = "Category"
-        self.navigationController?.navigationBar.barTintColor = .nigelle()
-        self.navigationController?.navigationBar.tintColor = .white
         
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButtonTapped(_:)))
         self.navigationItem.rightBarButtonItem = addBarButton
@@ -127,13 +125,13 @@ extension CategotyViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Cell row height
-        return 44
+        return 80
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell?
-        
+
         if cell == nil {
             // Create cell
             cell = UITableViewCell(style: .value1, reuseIdentifier: NSStringFromClass(CategoryTableViewCell.self))
@@ -144,6 +142,10 @@ extension CategotyViewController: UITableViewDataSource {
         
         return cell!
         
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
 }
@@ -160,6 +162,25 @@ extension CategotyViewController: UITableViewDelegate {
         todoListVC.selectedCategory = categoryArray?[indexPath.row]
         todoListVC.navigationTitle = categoryArray?[indexPath.row].name
         self.navigationController?.pushViewController(todoListVC, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            if let categoryForDeletion = categoryArray?[indexPath.row] {
+                do {
+                    try realm.write {
+                        realm.delete(categoryForDeletion)
+                    }
+                }
+                catch {
+                    print("Error deleting category: \(error)")
+                }
+                
+                updateUI()
+            }
+        }
         
     }
 

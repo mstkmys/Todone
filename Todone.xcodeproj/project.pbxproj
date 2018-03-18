@@ -24,6 +24,8 @@
 		68BE80EC205D72A10025F3F2 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BE80EA205D72A00025F3F2 /* Realm.framework */; };
 		68BE80F1205D77260025F3F2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80F0205D77260025F3F2 /* Item.swift */; };
 		68BE80F3205D772E0025F3F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE80F2205D772E0025F3F2 /* Category.swift */; };
+		68E8E8B7205E2AA400992060 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E8E8B6205E2AA400992060 /* SwipeCellKit.framework */; };
+		68E8E8B9205EBF4300992060 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E8E8B8205EBF4200992060 /* Chameleon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		68BE80EA205D72A00025F3F2 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		68BE80F0205D77260025F3F2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		68BE80F2205D772E0025F3F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		68E8E8B6205E2AA400992060 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
+		68E8E8B8205EBF4200992060 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68E8E8B9205EBF4300992060 /* Chameleon.framework in Frameworks */,
+				68E8E8B7205E2AA400992060 /* SwipeCellKit.framework in Frameworks */,
 				68BE80EB205D72A10025F3F2 /* RealmSwift.framework in Frameworks */,
 				68BE80EC205D72A10025F3F2 /* Realm.framework in Frameworks */,
 			);
@@ -215,6 +221,8 @@
 		68BE80E8205D72A00025F3F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68E8E8B8205EBF4200992060 /* Chameleon.framework */,
+				68E8E8B6205E2AA400992060 /* SwipeCellKit.framework */,
 				68BE80EA205D72A00025F3F2 /* Realm.framework */,
 				68BE80E9205D72A00025F3F2 /* RealmSwift.framework */,
 			);
@@ -359,6 +367,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwipeCellKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
 			);
 			outputPaths = (
 			);

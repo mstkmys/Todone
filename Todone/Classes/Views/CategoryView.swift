@@ -16,7 +16,6 @@ class CategoryView: UIView {
         
         let tableView = UITableView()
         tableView.showsVerticalScrollIndicator = false
-        tableView.separatorStyle = .none
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(CategoryTableViewCell.self))
         
         return tableView

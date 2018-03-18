@@ -24,7 +24,6 @@ class TodoListView: UIView {
        
         let tableView = UITableView()
         tableView.showsVerticalScrollIndicator = false
-        tableView.separatorStyle = .none
         tableView.register(TodoListTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TodoListTableViewCell.self))
         
         return tableView

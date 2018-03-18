@@ -54,8 +54,6 @@ class TodoListViewController: UIViewController {
     private func setUpNavigation() {
         
         self.navigationItem.title = navigationTitle
-        self.navigationController?.navigationBar.barTintColor = .nigelle()
-        self.navigationController?.navigationBar.tintColor = .white
         
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButtonTapped(_:)))
         self.navigationItem.rightBarButtonItem = addBarButton
@@ -155,7 +153,7 @@ extension TodoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Cell row height
-        return 44
+        return 80
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,6 +189,10 @@ extension TodoListViewController: UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -216,6 +218,26 @@ extension TodoListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            if let item = todoItems?[indexPath.row] {
+                do {
+                    try realm.write {
+                        realm.delete(item)
+                    }
+                }
+                catch {
+                    print("Error deleting category: \(error)")
+                }
+                
+                updateUI()
+            }
+        }
+        
+    }
+
     
 }
 

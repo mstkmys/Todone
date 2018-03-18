@@ -12,10 +12,21 @@ class CategoryTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
+    let nameLabel: UILabel = {
+        
+        let label = UILabel()
+        
+        return label
+        
+    }()
+    
     // MARK: - Initialize
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        // Add Views
+        [].forEach{ self.addSubview($0) }
         
     }
     
@@ -30,6 +41,14 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        
+        nameLabel.anchor(
+            top: self.topAnchor,
+            leading: self.leadingAnchor,
+            bottom: self.bottomAnchor,
+            trailing: self.trailingAnchor,
+            padding: .init(top: 0, left: 10, bottom: 0, right: 0)
+        )
         
     }
 
