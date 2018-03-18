@@ -6,7 +6,7 @@
 )](https://developer.apple.com/swift)
 [![Twitter](https://img.shields.io/badge/twitter-@mstkmys-blue.svg?style=flat)](https://twitter.com/mstkmys)
 
-This app is Todo List Application.
+![todo](https://user-images.githubusercontent.com/12792235/37569932-b8877cca-2b2c-11e8-856d-45e5d2253a43.gif)
 
 ## Author
 **Masataka Miyoshi**
