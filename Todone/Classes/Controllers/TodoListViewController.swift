@@ -30,14 +30,11 @@ class TodoListViewController: UIViewController {
             loadImtes()
         }
     }
-    var navigationTitle: String? = "TODO"
     
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUpNavigation()
         
         // Add views
         [todoListView].forEach{ self.view.addSubview($0) }
@@ -49,11 +46,15 @@ class TodoListViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setUpNavigation()
+    }
+    
     // MARK: - Methods
     
     private func setUpNavigation() {
         
-        self.navigationItem.title = navigationTitle
+        self.navigationItem.title = selectedCategory?.name ?? "TODO"
         
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButtonTapped(_:)))
         self.navigationItem.rightBarButtonItem = addBarButton

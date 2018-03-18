@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Chameleon
 
 class TodoListView: UIView {
     
@@ -15,6 +16,7 @@ class TodoListView: UIView {
     let searchBar: UISearchBar = {
        
         let searchBar = UISearchBar()
+        searchBar.barTintColor = .flatSkyBlue()
         
         return searchBar
         

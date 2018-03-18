@@ -30,8 +30,6 @@ class CategotyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavigation()
-        
         // Add views
         [categoryView].forEach{ self.view.addSubview($0) }
         
@@ -42,6 +40,10 @@ class CategotyViewController: UIViewController {
         // loadItem
         loadCategories()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setUpNavigation()
     }
     
     // MARK: - Methods
@@ -160,7 +162,6 @@ extension CategotyViewController: UITableViewDelegate {
         
         let todoListVC = TodoListViewController()
         todoListVC.selectedCategory = categoryArray?[indexPath.row]
-        todoListVC.navigationTitle = categoryArray?[indexPath.row].name
         self.navigationController?.pushViewController(todoListVC, animated: true)
         
     }
